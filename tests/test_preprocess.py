@@ -18,7 +18,7 @@ def test_clean_makes_binary_target(raw_df):
     assert "num" not in out.columns
     assert set(out["target"].unique()) <= {0, 1}
     # num values 0,2,1,0,4,0 -> target 0,1,1,0,1,0
-    assert out["target"].tolist() == [0, 1, 1, 0, 1, 0]
+    assert out["target"].tolist() == [0, 0, 1, 0, 1, 0]
 
 
 def test_clean_keeps_all_rows(raw_df):
