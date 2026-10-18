@@ -1,0 +1,76 @@
+name: CI pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:        # adds a "Run workflow" button in the Actions tab
+
+defaults:
+  run:
+    shell: bash             # bash with -e -o pipefail: any failing command fails the step
+
+jobs:
+  lint:
+    name: Lint (flake8)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install flake8
+        run: pip install flake8==7.4.1
+      - name: Run flake8
+        run: flake8 src tests
+
+  test:
+    name: Unit tests (pytest)
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run tests
+        run: pytest -v --junitxml=test-results.xml
+      - name: Upload test results
+        if: always()        # upload even when tests fail, so the failure can be inspected
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results.xml
+
+  train:
+    name: Train model
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Download data
+        run: python src/download_data.py
+      - name: Preprocess data
+        run: python src/preprocess.py
+      - name: Train and select model
+        run: python src/train.py 2>&1 | tee training-log.txt
+      - name: Smoke-test prediction
+        run: python src/predict.py sample_patient.json
+      - name: Upload model and reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-and-reports
+          path: |
+            models/
+            plots/
+            training-log.txt

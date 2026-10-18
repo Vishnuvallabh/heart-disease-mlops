@@ -1,0 +1,13 @@
+venv/
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+mlruns/
+mlflow.db
+plots/
+test-results.xml
+training-log.txt
+.DS_Store
+TASK*.md
+heart+disease/
+heart+disease.zip
