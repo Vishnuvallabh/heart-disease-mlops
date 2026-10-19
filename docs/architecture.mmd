@@ -1,0 +1,29 @@
+flowchart TB
+    subgraph DEV["① Developer laptop (Mac) – data, training, tracking"]
+        direction LR
+        UCI[("UCI Heart Disease<br/>processed.cleveland.data")] --> DL["download_data.py"] --> PRE["preprocess.py<br/>mode-fill ca/thal<br/>num → binary target"] --> TR["train.py<br/>LR + RF · GridSearchCV<br/>5-fold CV"]
+        PRE --> EDA["01_eda.ipynb<br/>EDA plots"]
+        TR --> MLF[("MLflow<br/>params · metrics<br/>plots · models")]
+        TR -->|"best by CV ROC-AUC"| MOD["models/model.joblib<br/>+ metadata.json"]
+    end
+
+    subgraph CI["② GitHub Actions – runs on every push"]
+        direction LR
+        L["Lint<br/>flake8"] --> T["Unit tests<br/>pytest · 18 tests"]
+        T --> TRN["Train model<br/>artifacts: model, plots, log"]
+        T --> DK["Build & test<br/>Docker image"]
+    end
+
+    subgraph K8S["③ Docker Desktop Kubernetes – namespace heart-disease"]
+        direction LR
+        USER(["Client<br/>JSON patient data"]) -->|"POST /predict"| SVC["LoadBalancer Service<br/>localhost:8080"]
+        SVC --> P1["heart-api pod 1<br/>FastAPI: /predict<br/>/health · /metrics"]
+        SVC --> P2["heart-api pod 2"]
+        PROM["Prometheus<br/>localhost:9090"] -.->|"scrape /metrics<br/>every 5 s"| P1
+        PROM -.-> P2
+        GRAF["Grafana dashboard<br/>localhost:3000"] --> PROM
+    end
+
+    DEV -->|"git push"| CI
+    CI -.->|"green pipeline =<br/>safe to deploy"| K8S
+    DEV -->|"docker build heart-api:1.1<br/>kubectl apply -f k8s/ (from laptop)"| K8S
