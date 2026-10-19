@@ -1,0 +1,31 @@
+### s2025ae05312@ip-10-3-16-189.ap-south-1.compute.internal  |  2026-10-19 23:11:13 IST  |  Linux 5.14.0-503.14.1.el9_5.x86_64
+$ ls -la models
+total 16
+drwxr-xr-x.  2 s2025ae05312 s2025ae05312   47 Oct 19 22:56 .
+drwxr-xr-x. 17 s2025ae05312 s2025ae05312 4096 Oct 19 23:11 ..
+-rw-r--r--.  1 s2025ae05312 s2025ae05312  445 Oct 19 23:11 metadata.json
+-rw-r--r--.  1 s2025ae05312 s2025ae05312 4273 Oct 19 23:11 model.joblib
+
+$ python src/predict.py sample_patient.json
+{
+  "prediction": 0,
+  "label": "no disease",
+  "confidence": 0.823
+}
+
+$ cat requirements.txt
+pandas==3.0.6
+numpy==2.5.4
+scikit-learn==1.9.1
+matplotlib==3.11.2
+seaborn==0.13.2
+jupyter==1.1.1
+mlflow==3.17.1
+joblib==1.6.0
+pytest==9.1.1
+flake8==7.4.1
+fastapi==0.143.5
+uvicorn==0.54.0
+httpx==0.28.1
+prometheus-client==0.26.0
+

@@ -1,0 +1,37 @@
+### s2025ae05312@ip-10-3-16-189.ap-south-1.compute.internal  |  2026-10-19 23:10:35 IST  |  Linux 5.14.0-503.14.1.el9_5.x86_64
+$ python src/train.py 2>&1 | grep -vE 'INFO|warn'
+2026/10/19 23:10:42 WARNING mlflow.sklearn: Saving scikit-learn models in the pickle or cloudpickle format requires exercising caution because these formats rely on Python's object serialization mechanism, which can execute arbitrary code during deserialization. The recommended safe alternative is the 'skops' format. For more information, see: https://scikit-learn.org/stable/model_persistence.html
+2026/10/19 23:11:03 WARNING mlflow.sklearn: Saving scikit-learn models in the pickle or cloudpickle format requires exercising caution because these formats rely on Python's object serialization mechanism, which can execute arbitrary code during deserialization. The recommended safe alternative is the 'skops' format. For more information, see: https://scikit-learn.org/stable/model_persistence.html
+logistic_regression: cv_roc_auc=0.907, test_accuracy=0.869, test_precision=0.812, test_recall=0.929, test_roc_auc=0.958
+random_forest: cv_roc_auc=0.894, test_accuracy=0.885, test_precision=0.818, test_recall=0.964, test_roc_auc=0.947
+
+Final model: logistic_regression -> models/model.joblib
+
+$ cat models/metadata.json
+{
+  "model_name": "logistic_regression",
+  "selected_by": "cv_roc_auc",
+  "features": [
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "restecg",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "slope",
+    "ca",
+    "thal"
+  ],
+  "metrics": {
+    "cv_roc_auc": 0.9069,
+    "test_accuracy": 0.8689,
+    "test_precision": 0.8125,
+    "test_recall": 0.9286,
+    "test_roc_auc": 0.9578
+  },
+  "sklearn_version": "1.9.1"
+}

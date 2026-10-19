@@ -1,0 +1,22 @@
+### s2025ae05312@ip-10-3-16-189.ap-south-1.compute.internal  |  2026-10-19 23:11:31 IST  |  Linux 5.14.0-503.14.1.el9_5.x86_64
+$ minikube kubectl -- scale deploy/heart-api -n heart-disease --replicas=3
+deployment.apps/heart-api scaled
+
+$ minikube kubectl -- rollout status deploy/heart-api -n heart-disease --timeout=120s
+Waiting for deployment "heart-api" rollout to finish: 2 of 3 updated replicas are available...
+deployment "heart-api" successfully rolled out
+
+$ minikube kubectl -- get pods -n heart-disease -l app=heart-api
+NAME                         READY   STATUS    RESTARTS   AGE
+heart-api-786dc54b64-479pq   1/1     Running   0          13s
+heart-api-786dc54b64-8grd8   1/1     Running   0          9m30s
+heart-api-786dc54b64-fn6wn   1/1     Running   0          9m30s
+
+$ minikube kubectl -- scale deploy/heart-api -n heart-disease --replicas=2
+deployment.apps/heart-api scaled
+
+$ sleep 10; minikube kubectl -- get pods -n heart-disease -l app=heart-api
+NAME                         READY   STATUS    RESTARTS   AGE
+heart-api-786dc54b64-8grd8   1/1     Running   0          9m40s
+heart-api-786dc54b64-fn6wn   1/1     Running   0          9m40s
+

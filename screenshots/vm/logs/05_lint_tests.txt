@@ -1,0 +1,31 @@
+### s2025ae05312@ip-10-3-16-189.ap-south-1.compute.internal  |  2026-10-19 23:11:16 IST  |  Linux 5.14.0-503.14.1.el9_5.x86_64
+$ flake8 src tests && echo 'flake8: no issues'
+flake8: no issues
+
+$ pytest -v -p no:warnings 2>&1 | tail -25
+configfile: pytest.ini
+testpaths: tests
+plugins: platformdirs-4.13.5, anyio-4.15.1
+collecting ... collected 18 items
+
+tests/test_api.py::test_health PASSED                                    [  5%]
+tests/test_api.py::test_predict_sample_patient PASSED                    [ 11%]
+tests/test_api.py::test_predict_rejects_missing_field PASSED             [ 16%]
+tests/test_api.py::test_predict_rejects_out_of_range_value PASSED        [ 22%]
+tests/test_api.py::test_metrics_endpoint_exposes_counters PASSED         [ 27%]
+tests/test_api.py::test_prediction_is_logged PASSED                      [ 33%]
+tests/test_model.py::test_preprocessor_scales_numeric_columns PASSED     [ 38%]
+tests/test_model.py::test_preprocessor_one_hot_encodes PASSED            [ 44%]
+tests/test_model.py::test_two_models_defined PASSED                      [ 50%]
+tests/test_model.py::test_probabilities_are_valid PASSED                 [ 55%]
+tests/test_model.py::test_evaluate_returns_all_metrics PASSED            [ 61%]
+tests/test_model.py::test_predict_output_format PASSED                   [ 66%]
+tests/test_model.py::test_unknown_category_does_not_crash PASSED         [ 72%]
+tests/test_preprocess.py::test_load_raw_reads_question_marks_as_missing PASSED [ 77%]
+tests/test_preprocess.py::test_clean_leaves_no_missing_values PASSED     [ 83%]
+tests/test_preprocess.py::test_clean_makes_binary_target PASSED          [ 88%]
+tests/test_preprocess.py::test_clean_keeps_all_rows PASSED               [ 94%]
+tests/test_preprocess.py::test_clean_does_not_change_input PASSED        [100%]
+
+============================== 18 passed in 4.48s ==============================
+

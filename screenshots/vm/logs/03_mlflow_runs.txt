@@ -1,0 +1,28 @@
+### s2025ae05312@ip-10-3-16-189.ap-south-1.compute.internal  |  2026-10-19 23:11:09 IST  |  Linux 5.14.0-503.14.1.el9_5.x86_64
+$ python -c "import mlflow; mlflow.set_tracking_uri('sqlite:///mlflow.db'); import pandas as pd; pd.set_option('display.width',200); df=mlflow.search_runs(experiment_names=['heart-disease']); print(df[[c for c in df.columns if c in ('run_id','tags.mlflow.runName','status') or c.startswith('metrics.')]].to_string())"
+                              run_id    status  metrics.cv_roc_auc  metrics.test_accuracy  metrics.test_recall  metrics.test_precision  metrics.test_roc_auc          tags.mlflow.runName
+0   6c0179a268434b658bb94a2946b6ad13  FINISHED            0.894126                    NaN                  NaN                     NaN                   NaN        random_forest_trial_5
+1   1eed81aa6d6a406f98c6eb3d2603608c  FINISHED            0.892588                    NaN                  NaN                     NaN                   NaN        random_forest_trial_4
+2   5980cec9d0c94e949535bdafb4504f4a  FINISHED            0.891724                    NaN                  NaN                     NaN                   NaN        random_forest_trial_3
+3   158531128bf847599edba0976ba764dc  FINISHED            0.892332                    NaN                  NaN                     NaN                   NaN        random_forest_trial_2
+4   80b306561c2944bfa84eb7a9c2ad09d6  FINISHED            0.894489                    NaN                  NaN                     NaN                   NaN        random_forest_trial_1
+5   dc94707b6a0c4d7f8df8b82896aaea22  FINISHED            0.894481                    NaN                  NaN                     NaN                   NaN        random_forest_trial_0
+6   9e4d0e277e1140bfa75c0314774355cf  FINISHED            0.894489               0.885246             0.964286                0.818182              0.946970                random_forest
+7   20554d91e6e040ac8cc1ad77b5588c3d  FINISHED            0.903843                    NaN                  NaN                     NaN                   NaN  logistic_regression_trial_3
+8   c1c20e4d04734e18a42eed3fc16161a7  FINISHED            0.906857                    NaN                  NaN                     NaN                   NaN  logistic_regression_trial_2
+9   c1c22641309241ca8cee62b95a7db4ee  FINISHED            0.906831                    NaN                  NaN                     NaN                   NaN  logistic_regression_trial_1
+10  a69094b00746452eb28b7bb886de5722  FINISHED            0.893204                    NaN                  NaN                     NaN                   NaN  logistic_regression_trial_0
+11  31266023cd0641c58eec697f385e0480  FINISHED            0.906857               0.868852             0.928571                0.812500              0.957792          logistic_regression
+12  7f34c9d9b39c4863a048d410d70976e2  FINISHED            0.894126                    NaN                  NaN                     NaN                   NaN        random_forest_trial_5
+13  af6b29cdfccb4e958b77af43700ac636  FINISHED            0.892588                    NaN                  NaN                     NaN                   NaN        random_forest_trial_4
+14  079b0ebe86074d4eb552c937f181ee16  FINISHED            0.891724                    NaN                  NaN                     NaN                   NaN        random_forest_trial_3
+15  cb9e8b14e1904b24802e78c4c72d165a  FINISHED            0.892332                    NaN                  NaN                     NaN                   NaN        random_forest_trial_2
+16  99153b22f7454711bb7d5073ee618672  FINISHED            0.894489                    NaN                  NaN                     NaN                   NaN        random_forest_trial_1
+17  9631dd21bb9543c0a85d824e5b734056  FINISHED            0.894481                    NaN                  NaN                     NaN                   NaN        random_forest_trial_0
+18  282ec38cbe1940f39c604fa068fce936  FINISHED            0.894489               0.885246             0.964286                0.818182              0.946970                random_forest
+19  3605dec7fd144ec8ac04929f20a2110c  FINISHED            0.903843                    NaN                  NaN                     NaN                   NaN  logistic_regression_trial_3
+20  fa2c92e35bf544708067e965c13141b6  FINISHED            0.906857                    NaN                  NaN                     NaN                   NaN  logistic_regression_trial_2
+21  b1ba9b819bd14cf7933f7cb12ebe40c2  FINISHED            0.906831                    NaN                  NaN                     NaN                   NaN  logistic_regression_trial_1
+22  4d458c58443d47babc061928c8e4fa17  FINISHED            0.893204                    NaN                  NaN                     NaN                   NaN  logistic_regression_trial_0
+23  3ac9b7c59a2043909465f61324540192  FINISHED            0.906857               0.868852             0.928571                0.812500              0.957792          logistic_regression
+

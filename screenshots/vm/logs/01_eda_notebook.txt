@@ -1,0 +1,21 @@
+### s2025ae05312@ip-10-3-16-189.ap-south-1.compute.internal  |  2026-10-19 23:10:23 IST  |  Linux 5.14.0-503.14.1.el9_5.x86_64
+$ jupyter nbconvert --to notebook --execute notebooks/01_eda.ipynb --output 01_eda_executed.ipynb 2>&1 | grep -v WARNING
+[NbConvertApp] Converting notebook notebooks/01_eda.ipynb to notebook
+[NbConvertApp] Writing 298897 bytes to notebooks/01_eda_executed.ipynb
+
+$ mkdir -p screenshots/vm/eda && cp screenshots/class_balance.png screenshots/correlation_heatmap.png screenshots/histograms.png screenshots/vm/eda/ && ls -la notebooks screenshots/vm/eda
+notebooks:
+total 556
+drwxr-xr-x.  2 s2025ae05312 s2025ae05312     55 Oct 19 22:59 .
+drwxr-xr-x. 17 s2025ae05312 s2025ae05312   4096 Oct 19 22:59 ..
+-rw-r--r--.  1 s2025ae05312 s2025ae05312 298907 Oct 19 23:10 01_eda_executed.ipynb
+-rw-r--r--.  1 s2025ae05312 s2025ae05312 264870 Oct 19 22:56 01_eda.ipynb
+
+screenshots/vm/eda:
+total 216
+drwxr-xr-x. 2 s2025ae05312 s2025ae05312     84 Oct 19 23:10 .
+drwxr-xr-x. 4 s2025ae05312 s2025ae05312     29 Oct 19 23:10 ..
+-rw-r--r--. 1 s2025ae05312 s2025ae05312  14543 Oct 19 23:10 class_balance.png
+-rw-r--r--. 1 s2025ae05312 s2025ae05312 158823 Oct 19 23:10 correlation_heatmap.png
+-rw-r--r--. 1 s2025ae05312 s2025ae05312  44617 Oct 19 23:10 histograms.png
+

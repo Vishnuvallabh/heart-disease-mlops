@@ -1,0 +1,15 @@
+### s2025ae05312@ip-10-3-16-189.ap-south-1.compute.internal  |  2026-10-19 23:11:23 IST  |  Linux 5.14.0-503.14.1.el9_5.x86_64
+$ docker rm -f heart-api-vm >/dev/null 2>&1; docker run -d -p 8000:8000 --name heart-api-vm heart-api:1.1
+07170c3981ff8671ad12a69cd4f33f3dcf61306db2f9854231d493505fa10ca9
+
+$ sleep 6; docker ps --filter name=heart-api-vm
+CONTAINER ID   IMAGE           COMMAND                  CREATED         STATUS                   PORTS                                         NAMES
+07170c3981ff   heart-api:1.1   "uvicorn app:app --a…"   6 seconds ago   Up 6 seconds (healthy)   0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp   heart-api-vm
+
+$ curl -s localhost:8000/health
+{"status":"ok"}
+$ curl -s -X POST localhost:8000/predict -H 'Content-Type: application/json' -d @sample_patient.json
+{"prediction":0,"label":"no disease","confidence":0.823}
+$ docker rm -f heart-api-vm
+heart-api-vm
+

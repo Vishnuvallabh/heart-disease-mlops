@@ -1,0 +1,4 @@
+### s2025ae05312@ip-10-3-16-189.ap-south-1.compute.internal  |  2026-10-19 23:12:15 IST  |  Linux 5.14.0-503.14.1.el9_5.x86_64
+$ python src/generate_traffic.py http://10.111.232.3:8080 150
+Sent 150 requests to http://10.111.232.3:8080: {422: 18, 200: 132}
+

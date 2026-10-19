@@ -1,0 +1,27 @@
+### s2025ae05312@ip-10-3-16-189.ap-south-1.compute.internal  |  2026-10-19 23:11:30 IST  |  Linux 5.14.0-503.14.1.el9_5.x86_64
+$ minikube kubectl -- get nodes -o wide
+NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION                 CONTAINER-RUNTIME
+minikube   Ready    control-plane   10m   v1.32.0   192.168.49.2   <none>        Ubuntu 22.04.5 LTS   5.14.0-503.14.1.el9_5.x86_64   docker://27.4.1
+
+$ minikube kubectl -- get all -n heart-disease -o wide
+NAME                              READY   STATUS    RESTARTS   AGE     IP           NODE       NOMINATED NODE   READINESS GATES
+pod/grafana-5969d859ff-5kmw5      1/1     Running   0          9m16s   10.244.0.5   minikube   <none>           <none>
+pod/heart-api-786dc54b64-8grd8    1/1     Running   0          9m17s   10.244.0.3   minikube   <none>           <none>
+pod/heart-api-786dc54b64-fn6wn    1/1     Running   0          9m17s   10.244.0.4   minikube   <none>           <none>
+pod/prometheus-57c69897c7-4j6dn   1/1     Running   0          9m16s   10.244.0.6   minikube   <none>           <none>
+
+NAME                 TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)          AGE     SELECTOR
+service/grafana      LoadBalancer   10.97.218.219   10.97.218.219   3000:32026/TCP   9m16s   app=grafana
+service/heart-api    LoadBalancer   10.111.232.3    10.111.232.3    8080:32616/TCP   9m17s   app=heart-api
+service/prometheus   LoadBalancer   10.98.179.15    10.98.179.15    9090:31005/TCP   9m16s   app=prometheus
+
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                   SELECTOR
+deployment.apps/grafana      1/1     1            1           9m16s   grafana      grafana/grafana:12.1.0   app=grafana
+deployment.apps/heart-api    2/2     2            2           9m17s   heart-api    heart-api:1.1            app=heart-api
+deployment.apps/prometheus   1/1     1            1           9m16s   prometheus   prom/prometheus:v3.5.0   app=prometheus
+
+NAME                                    DESIRED   CURRENT   READY   AGE     CONTAINERS   IMAGES                   SELECTOR
+replicaset.apps/grafana-5969d859ff      1         1         1       9m16s   grafana      grafana/grafana:12.1.0   app=grafana,pod-template-hash=5969d859ff
+replicaset.apps/heart-api-786dc54b64    2         2         2       9m17s   heart-api    heart-api:1.1            app=heart-api,pod-template-hash=786dc54b64
+replicaset.apps/prometheus-57c69897c7   1         1         1       9m16s   prometheus   prom/prometheus:v3.5.0   app=prometheus,pod-template-hash=57c69897c7
+

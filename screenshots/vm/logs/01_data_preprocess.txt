@@ -1,0 +1,17 @@
+### s2025ae05312@ip-10-3-16-189.ap-south-1.compute.internal  |  2026-10-19 23:10:21 IST  |  Linux 5.14.0-503.14.1.el9_5.x86_64
+$ python src/download_data.py
+Downloaded to data/raw/processed.cleveland.data
+
+$ python src/preprocess.py
+Saved 303 rows to data/processed/heart_clean.csv
+
+$ head -5 data/processed/heart_clean.csv
+age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal,target
+63.0,1.0,1.0,145.0,233.0,1.0,2.0,150.0,0.0,2.3,3.0,0.0,6.0,0
+67.0,1.0,4.0,160.0,286.0,0.0,2.0,108.0,1.0,1.5,2.0,3.0,3.0,1
+67.0,1.0,4.0,120.0,229.0,0.0,2.0,129.0,1.0,2.6,2.0,2.0,7.0,1
+37.0,1.0,3.0,130.0,250.0,0.0,0.0,187.0,0.0,3.5,3.0,0.0,3.0,0
+
+$ wc -l data/processed/heart_clean.csv
+304 data/processed/heart_clean.csv
+

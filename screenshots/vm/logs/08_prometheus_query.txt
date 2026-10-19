@@ -1,0 +1,29 @@
+### s2025ae05312@ip-10-3-16-189.ap-south-1.compute.internal  |  2026-10-19 23:12:58 IST  |  Linux 5.14.0-503.14.1.el9_5.x86_64
+$ curl -s -G http://10.98.179.15:9090/api/v1/query --data-urlencode 'query=sum by (status)(api_requests_total{endpoint="/predict"})' | python -m json.tool
+{
+    "status": "success",
+    "data": {
+        "resultType": "vector",
+        "result": [
+            {
+                "metric": {
+                    "status": "200"
+                },
+                "value": [
+                    1792431778.455,
+                    "174"
+                ]
+            },
+            {
+                "metric": {
+                    "status": "422"
+                },
+                "value": [
+                    1792431778.455,
+                    "22"
+                ]
+            }
+        ]
+    }
+}
+

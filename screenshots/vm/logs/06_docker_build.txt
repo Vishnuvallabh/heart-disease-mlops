@@ -1,0 +1,22 @@
+### s2025ae05312@ip-10-3-16-189.ap-south-1.compute.internal  |  2026-10-19 23:11:22 IST  |  Linux 5.14.0-503.14.1.el9_5.x86_64
+$ docker build -t heart-api:1.1 . 2>&1 | tail -15
+
+#9 [4/7] RUN pip install --no-cache-dir -r requirements-api.txt
+#9 CACHED
+
+#10 [3/7] COPY requirements-api.txt .
+#10 CACHED
+
+#11 [7/7] RUN useradd --create-home appuser
+#11 CACHED
+
+#12 exporting to image
+#12 exporting layers done
+#12 writing image sha256:7ab191c9c2e5d3665c2a2b5c49702b49ad98b64c48ed6525d53cf8e72fd6f66c done
+#12 naming to docker.io/library/heart-api:1.1 done
+#12 DONE 0.0s
+
+$ docker images heart-api
+REPOSITORY   TAG       IMAGE ID       CREATED          SIZE
+heart-api    1.1       7ab191c9c2e5   11 minutes ago   465MB
+

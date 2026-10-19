@@ -1,0 +1,12 @@
+### s2025ae05312@ip-10-3-16-189.ap-south-1.compute.internal  |  2026-10-19 23:12:58 IST  |  Linux 5.14.0-503.14.1.el9_5.x86_64
+$ cd /tmp/claude-1000/-home-s2025ae05312/b0376472-541c-4c11-a1f9-0032487d6daf/scratchpad/clean && git clone -q https://github.com/Vishnuvallabh/heart-disease-mlops.git && cd heart-disease-mlops && python3.12 -m venv venv && source venv/bin/activate && pip install -q -r requirements.txt 2>&1 | grep -v notice; echo 'pip install: done'; python src/download_data.py && python src/preprocess.py && python src/train.py 2>&1 | grep -E 'cv_roc|Final' && pytest -q -p no:warnings 2>&1 | tail -2
+
+pip install: done
+Downloaded to data/raw/processed.cleveland.data
+Saved 303 rows to data/processed/heart_clean.csv
+logistic_regression: cv_roc_auc=0.907, test_accuracy=0.869, test_precision=0.812, test_recall=0.929, test_roc_auc=0.958
+random_forest: cv_roc_auc=0.894, test_accuracy=0.885, test_precision=0.818, test_recall=0.964, test_roc_auc=0.947
+Final model: logistic_regression -> models/model.joblib
+..................                                                       [100%]
+18 passed in 4.33s
+

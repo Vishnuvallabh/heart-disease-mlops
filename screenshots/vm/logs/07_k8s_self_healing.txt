@@ -1,0 +1,16 @@
+### s2025ae05312@ip-10-3-16-189.ap-south-1.compute.internal  |  2026-10-19 23:11:54 IST  |  Linux 5.14.0-503.14.1.el9_5.x86_64
+$ minikube kubectl -- get pods -n heart-disease -l app=heart-api
+NAME                         READY   STATUS    RESTARTS   AGE
+heart-api-786dc54b64-8grd8   1/1     Running   0          9m40s
+heart-api-786dc54b64-fn6wn   1/1     Running   0          9m40s
+
+$ minikube kubectl -- delete pod heart-api-786dc54b64-8grd8 -n heart-disease --wait=false
+pod "heart-api-786dc54b64-8grd8" deleted
+
+$ sleep 20; minikube kubectl -- get pods -n heart-disease -l app=heart-api
+NAME                         READY   STATUS    RESTARTS   AGE
+heart-api-786dc54b64-fn6wn   1/1     Running   0          10m
+heart-api-786dc54b64-s8vjv   1/1     Running   0          20s
+
+$ curl -s http://10.111.232.3:8080/health
+{"status":"ok"}
