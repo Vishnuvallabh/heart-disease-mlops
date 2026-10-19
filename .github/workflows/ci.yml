@@ -74,3 +74,31 @@ jobs:
             models/
             plots/
             training-log.txt
+
+  docker:
+    name: Build & test Docker image
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t heart-api:ci .
+      - name: Start container
+        run: docker run -d -p 8000:8000 --name heart-api heart-api:ci
+      - name: Wait for /health
+        run: |
+          for i in $(seq 1 30); do
+            curl -sf http://localhost:8000/health && exit 0
+            sleep 1
+          done
+          echo "API did not become healthy in 30s"
+          exit 1
+      - name: Test /predict with sample input
+        run: |
+          curl -sf -X POST http://localhost:8000/predict \
+            -H "Content-Type: application/json" \
+            -d @sample_patient.json | tee prediction.json
+          grep -q '"prediction":0' prediction.json
+      - name: Container logs
+        if: always()
+        run: docker logs heart-api
