@@ -25,7 +25,7 @@ jobs:
         run: flake8 src tests
       - name: Validate Kubernetes manifests
         run: |
-          pip install kubernetes-validate
+          pip install kubernetes-validate==1.37.0
           kubernetes-validate k8s/*.yaml k8s/monitoring/*.yaml
 
   test:
