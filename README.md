@@ -201,6 +201,8 @@ minikube kubectl -- apply -f k8s/ -f k8s/monitoring/
 minikube tunnel        # assigns external IPs to the LoadBalancer services
 ```
 
+To bring everything up again in one go: `bash scripts/demo.sh up`. This sets up the venv, trains the model, builds the image, deploys to Minikube and starts MLflow and the port-forwards. Stop everything with `bash scripts/demo.sh down`. The demo talk track is [`docs/video_script.md`](docs/video_script.md).
+
 The evidence is in [`screenshots/vm/`](screenshots/vm/README.md): timestamped terminal captures, MLflow, Prometheus and Grafana screenshots, and the GitHub Actions run triggered from the VM.
 
 ## Report and video
