@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heart-api
+  namespace: heart-disease
+  labels:
+    app: heart-api
+spec:
+  replicas: 2                          # two copies: one can fail while the other serves
+  selector:
+    matchLabels:
+      app: heart-api
+  strategy:
+    type: RollingUpdate                # update one pod at a time, no downtime
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: heart-api
+    spec:
+      containers:
+        - name: heart-api
+          image: heart-api:1.0
+          imagePullPolicy: Never       # use the image built locally, don't download
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          readinessProbe:              # send traffic only once /health answers
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:               # restart the container if /health stops answering
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20

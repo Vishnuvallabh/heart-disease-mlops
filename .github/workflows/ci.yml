@@ -23,6 +23,10 @@ jobs:
         run: pip install flake8==7.4.1
       - name: Run flake8
         run: flake8 src tests
+      - name: Validate Kubernetes manifests
+        run: |
+          pip install kubernetes-validate
+          kubernetes-validate k8s/*.yaml
 
   test:
     name: Unit tests (pytest)
