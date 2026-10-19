@@ -31,3 +31,20 @@ def test_predict_rejects_missing_field():
 
 def test_predict_rejects_out_of_range_value():
     assert client.post("/predict", json={**SAMPLE, "age": 500}).status_code == 422
+
+
+def test_metrics_endpoint_exposes_counters():
+    client.post("/predict", json=SAMPLE)
+    response = client.get("/metrics")
+    assert response.status_code == 200
+    text = response.text
+    assert "api_requests_total" in text
+    assert 'api_predictions_total{label="no disease"}' in text
+    assert "api_request_latency_seconds_bucket" in text
+
+
+def test_prediction_is_logged(caplog):
+    with caplog.at_level("INFO", logger="heart-api"):
+        client.post("/predict", json=SAMPLE)
+    assert any('"event": "prediction"' in m for m in caplog.messages)
+    assert any('"path": "/predict"' in m for m in caplog.messages)

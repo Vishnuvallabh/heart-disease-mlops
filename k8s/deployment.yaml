@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: heart-api
-          image: heart-api:1.0
+          image: heart-api:1.1
           imagePullPolicy: Never       # use the image built locally, don't download
           ports:
             - containerPort: 8000

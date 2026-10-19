@@ -26,7 +26,7 @@ jobs:
       - name: Validate Kubernetes manifests
         run: |
           pip install kubernetes-validate
-          kubernetes-validate k8s/*.yaml
+          kubernetes-validate k8s/*.yaml k8s/monitoring/*.yaml
 
   test:
     name: Unit tests (pytest)
