@@ -1,7 +1,8 @@
-# Evidence: full pipeline re-run on a Linux VM
+# Evidence: full pipeline re-run on the BITS Prayogshala VM
 
-The project was re-run from a fresh `git clone` on a second machine, separate from the Mac laptop where it was built, to show that it is reproducible.
+The project was re-run from a fresh `git clone` on the BITS **Prayogshala** lab VM, separate from the Mac laptop where it was built, to show that it is reproducible.
 
+- **User:** `s2025ae05312` (BITS student ID)
 - **Host:** AWS EC2 `ip-10-3-16-189.ap-south-1.compute.internal`
 - **OS:** RHEL 9 (kernel 5.14.0-503)
 - **Python:** 3.12.9
@@ -23,6 +24,7 @@ Every terminal capture starts with a `### user@host | timestamp` line. `logs/` h
 | 3. MLflow tracking | `mlflow_runs.png`, `mlflow_run_details.png`, `mlflow_model_metrics.png`, `mlflow_artifacts.png`, `terminal/03_mlflow_runs.png` |
 | 4. Packaging | `terminal/04_packaging.png`: `model.joblib` + `metadata.json`, CLI prediction |
 | 5. Lint & tests | `terminal/05_lint_tests.png`: flake8 clean, 18/18 pytest pass |
+| 5. CI/CD | `ci/ci_run15_summary.png`: GitHub Actions [run #15](https://github.com/Vishnuvallabh/heart-disease-mlops/actions/runs/39298581443), triggered by commit `de3df7d` pushed from this VM; all 4 jobs green (lint, tests, train, Docker). `ci/artifacts/`: the run's uploaded artifacts (plots, `metadata.json`, `training-log.txt`), with the same metrics as the VM run |
 | 6. Docker | `terminal/06_docker_build.png`, `terminal/06_docker_run.png`: `/health` + `/predict` in the container |
 | 7. Kubernetes | `terminal/07_k8s_get_all.png`, `terminal/07_k8s_predict.png`, `terminal/07_k8s_scaling.png`, `terminal/07_k8s_self_healing.png`, `api_swagger_docs.png`, `api_swagger_predict.png` (live call through the LoadBalancer) |
 | 8. Monitoring & logging | `prometheus_targets.png`, `prometheus_graph.png`, `grafana_dashboard.png`, `terminal/08_traffic.png`, `terminal/08_api_request_logs.png`, `terminal/08_prometheus_query.png` |

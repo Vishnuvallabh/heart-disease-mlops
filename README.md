@@ -189,7 +189,21 @@ Invalid input (missing field or out-of-range value, e.g. `"age": 500`) returns `
 
 A failing job stops the jobs that depend on it.
 
+## Reproduced on the BITS Prayogshala VM
+
+The full pipeline (tasks 1–8) was re-run from a fresh clone on the Prayogshala lab VM, which runs RHEL 9. That run used Minikube instead of Docker Desktop:
+
+```bash
+minikube start --driver=docker
+minikube image load heart-api:1.1
+minikube kubectl -- apply -f k8s/namespace.yaml
+minikube kubectl -- apply -f k8s/ -f k8s/monitoring/
+minikube tunnel        # assigns external IPs to the LoadBalancer services
+```
+
+The evidence is in [`screenshots/vm/`](screenshots/vm/README.md): timestamped terminal captures, MLflow, Prometheus and Grafana screenshots, and the GitHub Actions run triggered from the VM.
+
 ## Report and video
 
-- Report: _to be added_
+- Report: [`report/MLOps_Assignment1_Report.pdf`](report/MLOps_Assignment1_Report.pdf) ([DOCX](report/MLOps_Assignment1_Report.docx))
 - Video: _to be added_
