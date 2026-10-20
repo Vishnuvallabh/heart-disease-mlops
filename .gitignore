@@ -12,3 +12,6 @@ TASK*.md
 heart+disease/
 heart+disease.zip
 .demo/
+docs/demo_script_mac.md
+docs/video_script.md
+scripts/demo.sh
