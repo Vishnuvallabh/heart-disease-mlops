@@ -206,4 +206,4 @@ The evidence is in [`screenshots/vm/`](screenshots/vm/README.md): timestamped te
 ## Report and video
 
 - Report: [`report/MLOps_Assignment1_Report.pdf`](report/MLOps_Assignment1_Report.pdf) ([DOCX](report/MLOps_Assignment1_Report.docx))
-- Video: _to be added_
+- Video demo: https://drive.google.com/file/d/1TrkfXdka5RmZLJbSianmY-37O-BMll1f/view?usp=share_link
